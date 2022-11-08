@@ -34,4 +34,11 @@ const createUser = async ({ displayName, email, password, image }) => {
   return token;
 };
 
-module.exports = { createUser, validateBody };
+const getUser = async () => {
+  const result = await User.findAll({
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
+  return result;
+};
+
+module.exports = { createUser, validateBody, getUser };

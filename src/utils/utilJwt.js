@@ -16,8 +16,8 @@ const validateToken = (token) => {
 
         return data;
     } catch (error) {
-        const e = new Error('Token inválido');
-        e.name = 'Não válido';
+        const e = new Error('Expired or invalid token');
+        e.status = 401;
         throw e;
     }
 };

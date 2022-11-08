@@ -1,4 +1,5 @@
 const express = require('express');
+// const auth = require('../middlewares/middlewareAuth');
 const login = require('./login');
 const user = require('./user');
 

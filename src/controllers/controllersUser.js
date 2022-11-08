@@ -7,4 +7,9 @@ const createUser = async (req, res) => {
   res.status(201).json({ token });
 };
 
-module.exports = { createUser };
+const getUser = async (req, res) => {
+  const result = await serviceUser.getUser();
+  res.status(200).json(result);
+};
+
+module.exports = { createUser, getUser };
