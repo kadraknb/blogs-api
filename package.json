@@ -22,6 +22,7 @@
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "start": "node .",
     "start:test": "API_PORT=3030 NODE_ENV=test npm start",
+    "kill": "if lsof -t -i:3030; then kill -9 $(lsof -t -i:3030); fi",
     "kill:test": "if lsof -t -i:3030; then kill -9 $(lsof -t -i:3030); fi",
     "drop": "npx sequelize-cli db:drop",
     "seed": "npx sequelize-cli db:seed:all",
