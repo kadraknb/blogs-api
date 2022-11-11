@@ -7,4 +7,10 @@ const postCategories = async (req, res) => {
   res.status(201).json(result);
 };
 
-module.exports = { postCategories };
+const getCategories = async (req, res) => {
+  const result = await serviceCategories.getAllCategory();
+  
+  res.status(200).json(result);
+};
+
+module.exports = { postCategories, getCategories };
