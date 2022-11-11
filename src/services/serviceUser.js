@@ -41,4 +41,15 @@ const getUser = async () => {
   return result;
 };
 
-module.exports = { createUser, validateBody, getUser };
+const getById = async (id) => {
+  const result = await User.findByPk(id);
+  if (!result) {
+    const e = new Error('User does not exist');
+    e.status = 404;
+    throw e;
+}
+  const { password: _, ...userWithoutPassword } = result.dataValues;
+  return userWithoutPassword;
+};
+
+module.exports = { createUser, validateBody, getUser, getById };

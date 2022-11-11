@@ -12,4 +12,9 @@ const getUser = async (req, res) => {
   res.status(200).json(result);
 };
 
-module.exports = { createUser, getUser };
+const getById = async (req, res) => {
+  const result = await serviceUser.getById(req.params.id);
+  res.status(200).json(result);
+};
+
+module.exports = { createUser, getUser, getById };
