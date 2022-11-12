@@ -31,9 +31,13 @@ const getById = async (req, res) => {
 };
 
 const updateById = async (req, res) => {
-  const { body, params, headers: { authorization } } = req;
+  const {
+    body,
+    params,
+    headers: { authorization },
+  } = req;
   const { id } = params;
-  
+
   await serviceBlogPost.updateById(id, body, authorization);
   const { dataValues } = await serviceBlogPost.getById(id);
 
@@ -41,10 +45,19 @@ const updateById = async (req, res) => {
 };
 
 const deletePostById = async (req, res) => {
-  const { params: { id }, headers: { authorization } } = req;
+  const {
+    params: { id },
+    headers: { authorization },
+  } = req;
 
   await serviceBlogPost.deletePost(id, authorization);
   res.status(204).end();
 };
 
-module.exports = { postInBlogPost, getInBlogPost, getById, updateById, deletePostById };
+module.exports = {
+  postInBlogPost,
+  getInBlogPost,
+  getById,
+  updateById,
+  deletePostById,
+};

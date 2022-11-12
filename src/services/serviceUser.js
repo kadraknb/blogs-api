@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { createToken } = require('../utils/utilJwt');
+const { createToken, validateToken } = require('../utils/utilJwt');
 const { User } = require('../models');
 
 const validateBody = (params) => {
@@ -52,4 +52,10 @@ const getById = async (id) => {
   return userWithoutPassword;
 };
 
-module.exports = { createUser, validateBody, getUser, getById };
+const deleteUser = async (token) => {
+  const { id } = validateToken(token);
+
+  await User.destroy({ where: { id } });
+};
+
+module.exports = { createUser, validateBody, getUser, getById, deleteUser };
