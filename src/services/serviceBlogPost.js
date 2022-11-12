@@ -1,4 +1,5 @@
 const { BlogPost, PostCategory, Category, User } = require('../models');
+const validate = require('./validations');
 
 const validatePost = async ({ body }) => {
   const filter = Object.values(body).filter((param) => !!param);
@@ -69,14 +70,23 @@ const getById = async (id) => {
       },
     ],
   });
-
   if (!result) {
     const e = new Error('Post does not exist');
     e.status = 404;
     throw e;
   }
-  
+
   return result;
+};
+
+const updateById = async (id, body, token) => {
+  validate.blogPost.bodyUpdate(body);
+
+  const { dataValues: { userId } } = await getById(id);
+  await validate.blogPost.user(userId, token);
+  
+  const date = new Date();
+  await BlogPost.update({ ...body, updated: date }, { where: { id } });
 };
 
 module.exports = {
@@ -85,4 +95,5 @@ module.exports = {
   validatePost,
   getInBlogPost,
   getById,
+  updateById,
 };

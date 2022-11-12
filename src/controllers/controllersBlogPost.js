@@ -30,4 +30,14 @@ const getById = async (req, res) => {
   res.status(200).json(result);
 };
 
-module.exports = { postInBlogPost, getInBlogPost, getById };
+const updateById = async (req, res) => {
+  const { body, params, headers: { authorization } } = req;
+  const { id } = params;
+  
+  await serviceBlogPost.updateById(id, body, authorization);
+  const { dataValues } = await serviceBlogPost.getById(id);
+
+  res.status(200).json(dataValues);
+};
+
+module.exports = { postInBlogPost, getInBlogPost, getById, updateById };
