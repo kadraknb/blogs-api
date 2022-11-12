@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, Category, User } = require('../models');
 const validate = require('./validations');
 
@@ -82,7 +83,9 @@ const getById = async (id) => {
 const updateById = async (id, body, token) => {
   validate.blogPost.bodyUpdate(body);
 
-  const { dataValues: { userId } } = await getById(id);
+  const {
+    dataValues: { userId },
+  } = await getById(id);
   await validate.blogPost.user(userId, token);
 
   const date = new Date();
@@ -90,10 +93,33 @@ const updateById = async (id, body, token) => {
 };
 
 const deletePost = async (id, token) => {
-  const { dataValues: { userId } } = await getById(id);
+  const {
+    dataValues: { userId },
+  } = await getById(id);
   await validate.blogPost.user(userId, token);
 
   await BlogPost.destroy({ where: { id } });
+};
+
+const getBySearch = async (search) => {
+  const result = BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
+    ],
+    where: {
+      [Op.or]: [
+        { title: { [Op.substring]: search } },
+        { content: { [Op.substring]: search } },
+      ],
+    },
+  });
+  return result;
 };
 
 module.exports = {
@@ -104,4 +130,5 @@ module.exports = {
   getById,
   updateById,
   deletePost,
+  getBySearch,
 };

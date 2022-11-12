@@ -54,10 +54,18 @@ const deletePostById = async (req, res) => {
   res.status(204).end();
 };
 
+const getBySearch = async (req, res) => {
+  const { q } = req.query;
+  const result = await serviceBlogPost.getBySearch(q);
+
+  res.status(200).json(result);
+};
+
 module.exports = {
   postInBlogPost,
   getInBlogPost,
   getById,
   updateById,
   deletePostById,
+  getBySearch,
 };
