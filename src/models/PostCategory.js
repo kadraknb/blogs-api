@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const ModulePostsCategories = sequelize.define(
     'PostCategory',
     {
-      post_id: {
+      postId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      category_id: {
+      categoryId: {
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'postId',
     });
     BlogPost.belongsToMany(Category, {
-      as: 'categoriesPosts',
+      as: 'categories',
       through: ModulePostsCategories,
       foreignKey: 'postId',
       otherKey: 'categoryId',

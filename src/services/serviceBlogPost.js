@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory, Category } = require('../models');
+const { BlogPost, PostCategory, Category, User } = require('../models');
 
 const validatePost = async ({ body }) => {
   const filter = Object.values(body).filter((param) => !!param);
@@ -36,14 +36,30 @@ const createPost = async ({ title, content, id, data }) => {
 const cratePostCategory = async (id, categoryIds) => {
   categoryIds.forEach(async (cateId) => {
     await PostCategory.create({
-      // eslint-disable-next-line camelcase
-      post_id: id, category_id: cateId,
-      });
+      postId: id,
+      categoryId: cateId,
+    });
   });
+};
+
+const getInBlogPost = () => {
+  const result = BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
+    ],
+  });
+  return result;
 };
 
 module.exports = {
   createPost,
   cratePostCategory,
   validatePost,
+  getInBlogPost,
 };
