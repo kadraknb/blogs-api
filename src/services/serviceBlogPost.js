@@ -57,9 +57,32 @@ const getInBlogPost = () => {
   return result;
 };
 
+const getById = async (id) => {
+  const result = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
+    ],
+  });
+
+  if (!result) {
+    const e = new Error('Post does not exist');
+    e.status = 404;
+    throw e;
+  }
+  
+  return result;
+};
+
 module.exports = {
   createPost,
   cratePostCategory,
   validatePost,
   getInBlogPost,
+  getById,
 };

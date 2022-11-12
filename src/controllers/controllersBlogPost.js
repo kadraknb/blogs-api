@@ -20,9 +20,14 @@ const postInBlogPost = async (req, res) => {
   res.status(201).json(resultPost.dataValues);
 };
 
-const getInBlogPost = async (req, res) => {
+const getInBlogPost = async (_req, res) => {
   const result = await serviceBlogPost.getInBlogPost();
   res.status(200).json(result);
 };
 
-module.exports = { postInBlogPost, getInBlogPost };
+const getById = async (req, res) => {
+  const result = await serviceBlogPost.getById(req.params.id);
+  res.status(200).json(result);
+};
+
+module.exports = { postInBlogPost, getInBlogPost, getById };
