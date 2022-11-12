@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use(validateToken);
 
-router.get('/:search?', controllersBlogPost.getBySearch);
+router.get('/search', controllersBlogPost.getBySearch);
 router.get('/:id', controllersBlogPost.getById);
 router.get('/', controllersBlogPost.getInBlogPost);
 
