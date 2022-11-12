@@ -84,9 +84,16 @@ const updateById = async (id, body, token) => {
 
   const { dataValues: { userId } } = await getById(id);
   await validate.blogPost.user(userId, token);
-  
+
   const date = new Date();
   await BlogPost.update({ ...body, updated: date }, { where: { id } });
+};
+
+const deletePost = async (id, token) => {
+  const { dataValues: { userId } } = await getById(id);
+  await validate.blogPost.user(userId, token);
+
+  await BlogPost.destroy({ where: { id } });
 };
 
 module.exports = {
@@ -96,4 +103,5 @@ module.exports = {
   getInBlogPost,
   getById,
   updateById,
+  deletePost,
 };
