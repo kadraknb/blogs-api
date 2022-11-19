@@ -1,13 +1,45 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Boas-vindas ao repositório do API de Blogs!
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+<details>
+  <summary><strong>O que foi desenvolvido</strong></summary>
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+  Neste projeto foi desenvolvido uma API e um banco de dados para a produção de conteúdo para um blog! 
+
+  desenvolvido em uma aplicação em `Node.js` usando o pacote `sequelize` para fazer um `CRUD` de posts.
+
+<br />
+</details>
+
+## 🛠 Tecnologias
+
+- javaStrip
+- Node.js
+- sequelize
+- Docker
+- MySQL
+
+## 🚀 Instalação e execução
+
+1. Faça um clone desse repositório;
+2. Entre na pasta rodando `cd blogs-api`;
+3. Rode `npm install` para instalar as dependências;
+4. Rode `docker-compose up -d --build` rodando no Docker.
+
+
+<details>
+  <summary><strong>Endpoint</strong></summary>
+  
+  * http://localhost:3000/user
+  * http://localhost:3000/user/me
+  * http://localhost:3000/post
+  * http://localhost:3000/post/:id
+  * http://localhost:3000/post/search?q=:searchTerm
+
+</details>
+
+
+## 📪 Contato
+
+- Email: [vagner_cardoso_s@outlook.com](vagner_cardoso_s@outlook.com)
+- GitHub: [kadraknb](https://github.com/kadraknb)
+- LinkedIn: [vagner-cardos-santos](https://www.linkedin.com/in/vagner-cardos-santos/)
