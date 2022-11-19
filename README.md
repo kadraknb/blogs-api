@@ -12,7 +12,7 @@
 
 ## 🛠 Tecnologias
 
-- javaStrip
+- JavaScript
 - Node.js
 - sequelize
 - Docker
